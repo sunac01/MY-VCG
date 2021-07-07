@@ -17,19 +17,19 @@ def _start(client, message):
                         "➕ Add me to your Group 🙋‍♀️", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],
                 [
                     InlineKeyboardButton(
-                        "📲 Updates", url=f"https://t.me/{UPDATES_CHANNEL}"), 
+                        "📲 Kanal", url=f"https://t.me/{UPDATES_CHANNEL}"), 
                     InlineKeyboardButton(
-                        "💬 Support", url=f"https://t.me/{SUPPORT_GROUP}")
+                        "💬 Support - Sohbet", url=f"https://t.me/{SUPPORT_GROUP}")
                 ],[
                     InlineKeyboardButton(
-                        "🛠 Source Code 🛠", url=f"https://{SOURCE_CODE}")
+                        "👨🏻‍💻 Yapımcı 👨🏻‍💻", url=f"https://t.me/Azerbesk")
                 ]
             ]
         ),
         reply_to_message_id=message.message_id
         )
 
-@Client.on_message(filters.command("start") & ~filters.private & ~filters.channel)
+@Client.on_message(filters.command("startadfaf") & filters.private & ~filters.channel)
 async def gstart(_, message: Message):
     await message.reply_text(
         f"""**🔴 {PROJECT_NAME} is online**""",
@@ -92,15 +92,15 @@ def map(pos):
         ]
     return button
 
-@Client.on_message(filters.command("help") & ~filters.private & ~filters.channel)
+@Client.on_message(filters.command("yardim") & ~filters.private & ~filters.channel)
 async def ghelp(_, message: Message):
     await message.reply_text(
-        f"""**🙋‍♀️ Hello there! I can play music in the voice chats of telegram groups.**""",
+        f"""**🙋‍♀️ Merhaba! Telegram gruplarının sesli sohbetlerinde müzik çalabiliyorum.**""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "⚙️ Click here for help", url=f"https://t.me/{BOT_USERNAME}?start"
+                        "⚙️ Yardım için buraya tıklayın", url=f"https://t.me/{BOT_USERNAME}?start"
                     )
                 ]
             ]
