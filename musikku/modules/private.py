@@ -92,7 +92,7 @@ def map(pos):
         ]
     return button
 
-@Client.on_message(filters.command("yardim") & ~filters.private & ~filters.channel)
+@Client.on_message(filters.command("yardim@NetdVoiceBot") & ~filters.private & ~filters.channel)
 async def ghelp(_, message: Message):
     await message.reply_text(
         f"""**🙋‍♀️ Merhaba! Telegram gruplarının sesli sohbetlerinde müzik çalabiliyorum.**""",
