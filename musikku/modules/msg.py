@@ -29,10 +29,10 @@ f"""
 
 ⎋ **Diğer Komutların Listesi**
 
-- /skip : Diğer Şarkıya Atlar
-- /pause : Oynatılan Şarkıyı Duraklatır.
-- /resume : Şarkıyı çalmaya devam ettirir.
-- /end : Müzik çalmayı durdurur.
+- /atla : Diğer Şarkıya Atlar
+- /duraklat : Oynatılan Şarkıyı Duraklatır.
+- /devam : Şarkıyı çalmaya devam ettirir.
+- /bitir : Müzik çalmayı durdurur.
 - /vcbak :  Seste çalan şarkıyı gösterir.
 - /playlist : Çalma Listesini Gösterir.
 
