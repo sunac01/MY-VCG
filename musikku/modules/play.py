@@ -71,7 +71,7 @@ async def playlist(client, message):
     global que
     queue = que.get(message.chat.id)
     if not queue:
-        await message.reply_text("Pemain menganggur")
+        await message.reply_text("Oynatıcı Boşta")
     temp = []
     for t in queue:
         temp.append(t)
@@ -353,24 +353,24 @@ async def play(_, message: Message):
             if administrator == message.from_user.id:
                 if message.chat.title.startswith("Channel Music: "):
                     await lel.edit(
-                        "<b>Ingatlah untuk menambahkan pembantu ke saluran Anda</b>",
+                        "<b>Kanalınıza yardımcı eklemeyi unutmayın</b>",
                     )
                     pass
                 try:
                     invitelink = await _.export_chat_invite_link(chid)
                 except:
                     await lel.edit(
-                        "<b>Tambahkan saya sebagai admin grup Anda terlebih dahulu</b>",
+                        "<b>Önce beni grup yöneticin yapmalısın</b>",
                     )
                     return
 
                 try:
                     await USER.join_chat(invitelink)
                     await USER.send_message(
-                        message.chat.id, "Saya bergabung dengan grup ini untuk memutar musik di VC"
+                        message.chat.id, "VC'de müzik çalmak için bu gruba katıldım"
                     )
                     await lel.edit(
-                        "<b>helper userbot joined your chat</b>",
+                        "<b>yardımcı userbot sohbetinize katıldı</b>",
                     )
 
                 except UserAlreadyParticipant:
@@ -378,8 +378,7 @@ async def play(_, message: Message):
                 except Exception:
                     # print(e)
                     await lel.edit(
-                        f"<b>🔴 Kesalahan permintaan banjir 🔴 \nUser {user.first_name} tidak dapat bergabung dengan grup Anda karena banyak permintaan untuk userbot! Pastikan pengguna tidak diblokir di grup."
-                        "\n\nAtau tambahkan asisten ke Grup Anda secara manual dan coba lagi</b>",
+                        f"<b>Asistan Birçok İstek Nedeniyle Grubunuza Katılamıyor</b>",
                     )
     try:
         await USER.get_chat(chid)
@@ -405,7 +404,7 @@ async def play(_, message: Message):
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
-                f"❌ Video lebih panjang dari {DURATION_LIMIT} minute(s) tidak diperbolehkan diputar!"
+                f"❌ {DURATION_LIMIT} Dakikadan Uzunlara İzin Verilmez."
             )
         keyboard = InlineKeyboardMarkup(
             [
@@ -435,7 +434,7 @@ async def play(_, message: Message):
         for i in message.command[1:]:
             query += " " + str(i)
         print(query)
-        await lel.edit("🎵 **Netd Voice Bot Oynatıyor..**")
+        await lel.edit("🎵 **Yeni Şarkı Sıraya Alındı Veya Şuan Oynatılacak..**")
         ydl_opts = {"format": "bestaudio[ext=m4a]"}
         try:
             results = YoutubeSearch(query, max_results=1).to_dict()
