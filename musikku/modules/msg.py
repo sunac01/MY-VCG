@@ -1,7 +1,7 @@
 import os
 from musikku.config import SOURCE_CODE,ASSISTANT_NAME,PROJECT_NAME,SUPPORT_GROUP,UPDATES_CHANNEL
 class Messages():
-      START_MSG = "**Hello 👋 [{}](tg://user?id={})!**\n\n🤖 Telegram gruplarında sesli sohbette müzik çalmak için oluşturulmuş bir müzik botuyum.\n\n✅ Komut /help Kullanım Rehberidir Lütfen Bakın"
+      START_MSG = "**MERHABA👋 [{}](tg://user?id={})!**\n\n🤖 Telegram gruplarında sesli sohbette müzik çalmak için oluşturulmuş bir müzik botuyum.\n\n✅ Komut /help Kullanım Rehberidir Lütfen Bakın"
       HELP_MSG = [
         ".",
 f"""
