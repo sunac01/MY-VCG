@@ -98,13 +98,11 @@ async def playlist(client, message):
 def updated_stats(chat, queue, vol=100):
     if chat.id in callsmusic.pytgcalls.active_calls:
         # if chat.id in active_chats:
-        stats = "Ayarlar **{}**".format(chat.title)
+        stats = "Netd Vc Bot**{}**".format(chat.title)
         if len(que) > 0:
-            stats += "\n\n"
-            stats += "Volume : {}%\n".format(vol)
-            stats += "Lagu dalam antrian : `{}`\n".format(len(que))
-            stats += "Sedang dimainkan : **{}**\n".format(queue[0][0])
-            stats += "Permintaan dari : {}".format(queue[0][1].mention)
+            stats += "Ses: {}%\n".format(vol)
+            stats += "Sıradaki şarkılar : `{}`\n".format(len(que))
+            stats += "Şuanda Çalan : **{}**\n".format(queue[0][0])
     else:
         stats = None
     return stats
@@ -139,7 +137,7 @@ async def ee(client, message):
     if stats:
         await message.reply(stats)
     else:
-        await message.reply("Tidak ada instans VC yang berjalan dalam obrolan ini")
+        await message.reply("Şuan Çalan Şarkı Yok")
 
 
 @Client.on_message(filters.command("pllafkaflakfv") & filters.group & ~filters.edited)
@@ -229,7 +227,7 @@ async def m_cb(b, cb):
         if (chet_id not in callsmusic.pytgcalls.active_calls) or (
             callsmusic.pytgcalls.active_calls[chet_id] == "Çalışıyor"
         ):
-            await cb.answer("ohbet bağlı değil!", show_alert=True)
+            await cb.answer("Sohbet bağlı değil!", show_alert=True)
         else:
             callsmusic.pytgcalls.resume_stream(chet_id)
             await cb.answer("Müzik Devam Etti!")
@@ -393,7 +391,7 @@ async def play(_, message: Message):
         return
     message.from_user.id
     message.from_user.first_name
-    await lel.edit("🔎 **Menemukan**")
+    await lel.edit("🔎 **Aranıyor**")
     message.from_user.id
     user_id = message.from_user.id
     message.from_user.first_name
