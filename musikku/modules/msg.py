@@ -9,7 +9,7 @@ f"""
 
 ⚡ {PROJECT_NAME} Grup sesli sohbetinizde ve Kanal sesli sohbetinizde müzik çalabilir ASİSTAN GRUPTA OLMADAN ÇALIŞMAZ !!
 
-⚡ Botun Yardımcı Asistanı >> @{ASSISTANT_NAME}\n\nKlik tombol dibawah untuk melihat Panduan menggunakan bot**
+⚡ Botun Yardımcı Asistanı >> @{ASSISTANT_NAME}**
 """,
 
 f"""
