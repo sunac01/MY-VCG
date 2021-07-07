@@ -8,6 +8,6 @@ from musikku.services.callsmusic.callsmusic import client as USER
 async def pmPermit(client: USER, message: Message):
     await USER.send_message(
         message.chat.id,
-        "Halo, Ini adalah layanan asisten musik .\n\n❗️ Aturan:\n - Chatting tidak diizinkan\n  - Spam tidak diizinkan\n\n👉 **KIRIM LINK UNDANGAN GRUP ATAU NAMA PENGGUNA JIKA USERBOT TIDAK BISA BERGABUNG GROUP.**\n\n⚠️ Penafian: Jika Anda mengirim pesan di sini, artinya admin akan melihat pesan Anda dan bergabung dengan obrolan\n - Jangan tambahkan pengguna ini ke grup rahasia.\n - Jangan Bagikan info pribadi disini\n\n",
+        "Merhaba, Bu bir müzik asistanlığı hizmetidir.Lütfen Spam Yapmayın Egellenirsiniz. Destekçi @Azerbesk Lütfen Ona Mesaj Atın!",
    )
     return
