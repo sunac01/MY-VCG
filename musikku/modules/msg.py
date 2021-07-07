@@ -33,8 +33,8 @@ f"""
 - /pause : Oynatılan Şarkıyı Duraklatır.
 - /resume : Şarkıyı çalmaya devam ettirir.
 - /end : Müzik çalmayı durdurur.
-- /vcbak : şu anda çalan şarkıyı gösterir.
-- /playlist : melihat daftar playlist
+- /vcbak :  Seste çalan şarkıyı gösterir.
+- /playlist : Çalma Listesini Gösterir.
 
 """,
         
@@ -42,11 +42,11 @@ f"""
 ⎋ ** Diğer Komutların Listesi**
 
 - /reload : yönetici listesini güncelle
-- /userbotjoin :  Grubunuza Ekle @{ASSISTANT_NAME} 
+: Grubunuza Asistanı Eklemeyi Unutmayın @{ASSISTANT_NAME} Gerçek Asistandır.
 
 """,
 
 f"""
-**🦞EMEĞİ GEÇEN HERKESE TEŞEKKÜRLER.🦞** 
+**🦞 @NetdBots EMEĞİ GEÇEN HERKESE TEŞEKKÜRLER. 🦞** 
 """
       ]
