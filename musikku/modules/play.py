@@ -38,7 +38,7 @@ def cb_admin_check(func: Callable) -> Callable:
         if cb.from_user.id in admemes:
             return await func(client, cb)
         else:
-            await cb.answer("You ain't allowed!", show_alert=True)
+            await cb.answer("Sana izin yok!", show_alert=True)
             return
 
     return decorator
@@ -77,13 +77,13 @@ async def playlist(client, message):
         temp.append(t)
     now_playing = temp[0][0]
     by = temp[0][1].mention(style="md")
-    msg = "**Sedang dimainkan** in {}".format(message.chat.title)
+    msg = "**PLAYLİST** {}".format(message.chat.title)
     msg += "\n- " + now_playing
     msg += "\n- Req by " + by
     temp.pop(0)
     if temp:
         msg += "\n\n"
-        msg += "**Antre**"
+        msg += "**Giriş**"
         for song in temp:
             name = song[0]
             usr = song[1].mention(style="md")
@@ -98,7 +98,7 @@ async def playlist(client, message):
 def updated_stats(chat, queue, vol=100):
     if chat.id in callsmusic.pytgcalls.active_calls:
         # if chat.id in active_chats:
-        stats = "Pengaturan di **{}**".format(chat.title)
+        stats = "Ayarlar **{}**".format(chat.title)
         if len(que) > 0:
             stats += "\n\n"
             stats += "Volume : {}%\n".format(vol)
@@ -132,7 +132,7 @@ def r_ply(type_):
     return mar
 
 
-@Client.on_message(filters.command("current") & filters.group & ~filters.edited)
+@Client.on_message(filters.command("vcbak") & filters.group & ~filters.edited)
 async def ee(client, message):
     queue = que.get(message.chat.id)
     stats = updated_stats(message.chat, queue)
@@ -142,7 +142,7 @@ async def ee(client, message):
         await message.reply("Tidak ada instans VC yang berjalan dalam obrolan ini")
 
 
-@Client.on_message(filters.command("player") & filters.group & ~filters.edited)
+@Client.on_message(filters.command("pllafkaflakfv") & filters.group & ~filters.edited)
 @authorized_users_only
 async def settings(client, message):
     playing = None
@@ -158,7 +158,7 @@ async def settings(client, message):
         else:
             await message.reply(stats, reply_markup=r_ply("play"))
     else:
-        await message.reply("Tidak ada instans VC yang berjalan dalam obrolan ini")
+        await message.reply("Bu sohbette çalışan VC örneği yok")
 
 
 @Client.on_callback_query(filters.regex(pattern=r"^(playlist)$"))
@@ -172,19 +172,19 @@ async def p_cb(b, cb):
     if type_ == "playlist":
         queue = que.get(cb.message.chat.id)
         if not queue:
-            await cb.message.edit("Pemain menganggur")
+            await cb.message.edit("Oynatıcı Boşta")
         temp = []
         for t in queue:
             temp.append(t)
         now_playing = temp[0][0]
         by = temp[0][1].mention(style="md")
-        msg = "**Sedang dimainkan** in {}".format(cb.message.chat.title)
+        msg = "**PLAYLİST**  {}".format(cb.message.chat.title)
         msg += "\n- " + now_playing
         msg += "\n- Req by " + by
         temp.pop(0)
         if temp:
             msg += "\n\n"
-            msg += "**Antre**"
+            msg += "**Giriş**"
             for song in temp:
                 name = song[0]
                 usr = song[1].mention(style="md")
@@ -200,7 +200,7 @@ async def p_cb(b, cb):
 async def m_cb(b, cb):
     global que
     if (
-        cb.message.chat.title.startswith("Channel Music: ")
+        cb.message.chat.title.startswith("Kanal Müziği: ")
         and chat.title[14:].isnumeric()
     ):
         chet_id = int(chat.title[13:])
@@ -214,45 +214,45 @@ async def m_cb(b, cb):
     the_data = cb.message.reply_markup.inline_keyboard[1][0].callback_data
     if type_ == "pause":
         if (chet_id not in callsmusic.pytgcalls.active_calls) or (
-            callsmusic.pytgcalls.active_calls[chet_id] == "paused"
+            callsmusic.pytgcalls.active_calls[chet_id] == "Duraklatıldı"
         ):
-            await cb.answer("Obrolan tidak terhubung!", show_alert=True)
+            await cb.answer("Sohbet bağlı değil!", show_alert=True)
         else:
             callsmusic.pytgcalls.pause_stream(chet_id)
 
             await cb.answer("Music Paused!")
             await cb.message.edit(
-                updated_stats(m_chat, qeue), reply_markup=r_ply("play")
+                updated_stats(m_chat, qeue), reply_markup=r_ply("oynat")
             )
 
-    elif type_ == "play":
+    elif type_ == "oynat":
         if (chet_id not in callsmusic.pytgcalls.active_calls) or (
-            callsmusic.pytgcalls.active_calls[chet_id] == "playing"
+            callsmusic.pytgcalls.active_calls[chet_id] == "Çalışıyor"
         ):
-            await cb.answer("Obrolan tidak terhubung!", show_alert=True)
+            await cb.answer("ohbet bağlı değil!", show_alert=True)
         else:
             callsmusic.pytgcalls.resume_stream(chet_id)
-            await cb.answer("Music Resumed!")
+            await cb.answer("Müzik Devam Etti!")
             await cb.message.edit(
-                updated_stats(m_chat, qeue), reply_markup=r_ply("pause")
+                updated_stats(m_chat, qeue), reply_markup=r_ply("duraklat")
             )
 
     elif type_ == "playlist":
         queue = que.get(cb.message.chat.id)
         if not queue:
-            await cb.message.edit("Pemain menganggur")
+            await cb.message.edit("Oynatıcı Boşta")
         temp = []
         for t in queue:
             temp.append(t)
         now_playing = temp[0][0]
         by = temp[0][1].mention(style="md")
-        msg = "**Sedang dimainkan** in {}".format(cb.message.chat.title)
+        msg = "**PLAYLİST**  {}".format(cb.message.chat.title)
         msg += "\n- " + now_playing
         msg += "\n- Req by " + by
         temp.pop(0)
         if temp:
             msg += "\n\n"
-            msg += "**Antre**"
+            msg += "**Giriş**"
             for song in temp:
                 name = song[0]
                 usr = song[1].mention(style="md")
@@ -260,25 +260,25 @@ async def m_cb(b, cb):
                 msg += f"\n- Req by {usr}\n"
         await cb.message.edit(msg)
 
-    elif type_ == "resume":
+    elif type_ == "devam":
         if (chet_id not in callsmusic.pytgcalls.active_calls) or (
-            callsmusic.pytgcalls.active_calls[chet_id] == "playing"
+            callsmusic.pytgcalls.active_calls[chet_id] == "Oynatılıyor"
         ):
-            await cb.answer("Obrolan tidak terhubung or already playng", show_alert=True)
+            await cb.answer("Sohbet bağlı değil veya zaten oynuyor", show_alert=True)
         else:
             callsmusic.pytgcalls.resume_stream(chet_id)
-            await cb.answer("Music Resumed!")
+            await cb.answer("Müzik Devam Etti!")
     elif type_ == "puse":
         if (chet_id not in callsmusic.pytgcalls.active_calls) or (
-            callsmusic.pytgcalls.active_calls[chet_id] == "paused"
+            callsmusic.pytgcalls.active_calls[chet_id] == "duraklatıldı"
         ):
-            await cb.answer("Obrolan tidak terhubung atau sudah dijeda", show_alert=True)
+            await cb.answer("Sohbet bağlı değil veya duraklatıldı", show_alert=True)
         else:
             callsmusic.pytgcalls.pause_stream(chet_id)
 
-            await cb.answer("Music Paused!")
+            await cb.answer("Müzik Duraklatıldı")
     elif type_ == "cls":
-        await cb.answer("Closed menu")
+        await cb.answer("Kapalı menü")
         await cb.message.delete()
 
     elif type_ == "menu":
@@ -299,26 +299,26 @@ async def m_cb(b, cb):
             ]
         )
         await cb.message.edit(stats, reply_markup=marr)
-    elif type_ == "skip":
+    elif type_ == "atla":
         if qeue:
             qeue.pop(0)
         if chet_id not in callsmusic.pytgcalls.active_calls:
-            await cb.answer("Obrolan tidak terhubung!", show_alert=True)
+            await cb.answer("Sohbet bağlı değil!", show_alert=True)
         else:
             callsmusic.queues.task_done(chet_id)
 
             if callsmusic.queues.is_empty(chet_id):
                 callsmusic.pytgcalls.leave_group_call(chet_id)
 
-                await cb.message.edit("- Tidak Ada Lagi Daftar Putar..\n- Keluar dari VC!")
+                await cb.message.edit("- Artık Oynatma Listesi Yok..\n- VC'den çıkın!")
             else:
                 callsmusic.pytgcalls.change_stream(
                     chet_id, callsmusic.queues.get(chet_id)["file"]
                 )
-                await cb.answer("Skipped")
+                await cb.answer("Atlandı !")
                 await cb.message.edit((m_chat, qeue), reply_markup=r_ply(the_data))
                 await cb.message.reply_text(
-                    f"- Skipped track\n- Sedang dimainkan **{qeue[0][0]}**"
+                    f"- Atlanan parça\n- Oyunda **{qeue[0][0]}**"
                 )
 
     else:
@@ -329,15 +329,15 @@ async def m_cb(b, cb):
                 pass
 
             callsmusic.pytgcalls.leave_group_call(chet_id)
-            await cb.message.edit("Berhasil Meninggalkan Obrolan!")
+            await cb.message.edit("Sohbetten Başarıyla Ayrılın!")
         else:
-            await cb.answer("Obrolan tidak terhubung!", show_alert=True)
+            await cb.answer("Sohbet bağlı değil!", show_alert=True)
 
 
-@Client.on_message(command("play") & other_filters)
+@Client.on_message(command("oynat") & other_filters)
 async def play(_, message: Message):
     global que
-    lel = await message.reply("🔄 **Sabar aja cuk**")
+    lel = await message.reply("🔄 **Lütfen Bekleyin..**")
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
 
@@ -437,7 +437,7 @@ async def play(_, message: Message):
         for i in message.command[1:]:
             query += " " + str(i)
         print(query)
-        await lel.edit("🎵 **Sabar aja cuk**")
+        await lel.edit("🎵 **Netd Voice Bot Oynatıyor..**")
         ydl_opts = {"format": "bestaudio[ext=m4a]"}
         try:
             results = YoutubeSearch(query, max_results=1).to_dict()
@@ -454,7 +454,7 @@ async def play(_, message: Message):
 
         except Exception as e:
             await lel.edit(
-                "Song not found.Try another song or maybe spell it properly."
+                "Şarkı bulunamadı.Başka bir şarkı deneyin veya doğru heceleyin."
             )
             print(str(e))
             return
@@ -499,12 +499,12 @@ async def play(_, message: Message):
         try:
             callsmusic.pytgcalls.join_group_call(chat_id, file_path)
         except:
-            message.reply("Group Call is not connected or I can't join it")
+            message.reply("Grup Araması bağlı değil veya katılamıyorum")
             return
         await message.reply_photo(
             photo="final.png",
             reply_markup=keyboard,
-            caption="▶️ **Playing** Permintaan dari {} via Youtube Music 😜".format(
+            caption="▶️ **Oynatılıyor** Şuradan istek: {} Youtube Müzik aracılığıyla 😜".format(
                 message.from_user.mention()
             ),
         )
@@ -512,7 +512,7 @@ async def play(_, message: Message):
         return await lel.delete()
 
 
-@Client.on_message(filters.command("dplay") & filters.group & ~filters.edited)
+@Client.on_message(filters.command("dplafasfdy") & filters.group & ~filters.edited)
 async def deezer(client: Client, message_: Message):
     global que
     lel = await message_.reply("🔄 **Sabar aja cuk**")
@@ -635,7 +635,7 @@ async def deezer(client: Client, message_: Message):
     os.remove("final.png")
 
 
-@Client.on_message(filters.command("splay") & filters.group & ~filters.edited)
+@Client.on_message(filters.command("splafafaay") & filters.group & ~filters.edited)
 async def jiosaavn(client: Client, message_: Message):
     global que
     lel = await message_.reply("🔄 **Sabar aja cuk**")
