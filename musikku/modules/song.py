@@ -20,7 +20,7 @@ from youtubesearchpython import SearchVideos
 
 
 
-@Client.on_message(filters.command("song") & ~filters.channel)
+@Client.on_message(filters.command("indir") & ~filters.channel)
 def song(client, message):
 
     user_id = message.from_user.id
