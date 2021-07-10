@@ -385,7 +385,7 @@ async def play(_, message: Message):
         # lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            f"<i> {user.first_name} Userbot tidak ada dalam obrolan ini, Minta admin untuk mengirim perintah /play untuk pertama kalinya atau menambahkan {user.first_name} secara manual</i>"
+            f"<i> Music Asistanı Grupta Deil Lütfen Gruba @NetdVcRobot 'u Ekleyin Sorun Varsa @NetdBots 'a Bildirin.</i>"
         )
         return
     message.from_user.id
